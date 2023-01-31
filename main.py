@@ -11,6 +11,12 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
 from flask import abort
+import os
+from sqlalchemy import create_engine
+
+from sqlalchemy import create_engine
+engine = create_engine('postgresql+psycopg2://blogs_x9di_user:V2h26FGFEdAHGKLtjgQXlirysnYKU1gZ@dpg-cfcgj482i3mhen6dkr20-a/blogs_x9di')
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -20,7 +26,7 @@ Bootstrap(app)
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = engine
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
